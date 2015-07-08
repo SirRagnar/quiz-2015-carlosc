@@ -1,0 +1,14 @@
+{
+  "name": "Quiz",
+  "version": "1.0.0",
+  "description": "Ejercicio P2P del módulo 6 del curso de \"Desarrollo de servicios en la nube con HTML5, Javascript y node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "quiz"
+  ],
+  "author": "Carlos Castillo Alarcón",
+  "license": "ISC"
+}
