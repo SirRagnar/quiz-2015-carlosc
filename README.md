@@ -1,6 +1,9 @@
 # Quiz el juego de las pregunas
 
 Ejercicio del curso de [Desarrollo de servicios en la nube con HTML5, Javascript y node.js](https://www.miriadax.net/web/javascript-node-js)
+
+El resultado del ejercicio está desplegado en [heroku](https://quiz-2015-carlosc.herokuapp.com/).
+
 ## Build & development
 
 Ejecuta `npm install` para instalarlo y `npm start` para arrancarlo.
