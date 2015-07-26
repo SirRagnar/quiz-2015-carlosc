@@ -2,3 +2,4 @@ node_modules
 npm-degug.log
 *.sqlite
 .env
+pregunta-foro.txt
