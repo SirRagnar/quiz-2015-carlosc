@@ -13,19 +13,19 @@ var port     = (url[5]||null);
 var host     = (url[4]||null);
 var storage  = process.env.DATABASE_STORAGE;
 
-/*
+
 console.log('Variables de la cadena de conexión presuntamente establecidas: \n'+
 	'ulr: ' + url + '\n' +
 	'DB_name:' + DB_name + '\n' +
 	'user:' + user + '\n' +
-	'pwd:' + pwd + '\n' +
+	//'pwd:' + pwd + '\n' +
 	'protocol:' + protocol + '\n' +
 	'dialect:' + dialect + '\n' +
 	'port:' + port + '\n' +
 	'host:' + host + '\n' +
 	'storage:' + storage 
 	);
-*/
+
 // Cargar modelo ORM
 var Sequelize=require('sequelize');
 
