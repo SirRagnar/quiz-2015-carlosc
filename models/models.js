@@ -2,7 +2,8 @@ var path=require('path');
 
 // Postgres DATABASE_URL = postgres://user:passwd@host:port/database
 // SQLite   DATABASE_URL = sqlite://:@:/
-//var process = process || {env:{DATABASE_STORAGE:'quiz-noenv.sqlite',DATABASE_URL:'sqlite://:@:/' }};
+// Descomentar para que funcione con npm start
+//var process=process ||{};process.env = process.env || {DATABASE_STORAGE:'quiz-noenv.sqlite',DATABASE_URL:'sqlite://:@:/' };console.log('process.env' + process.env);
 var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
 var DB_name  = (url[6]||null);
 var user     = (url[2]||null);
