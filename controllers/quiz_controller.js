@@ -18,7 +18,7 @@ exports.load=function(req,res,next,quizId){
 }
 
 // GET /quizes
-exports.index=function(req,res){
+exports.index=function(req,res,next){
 
     var opcionesBusqueda={};   
     var filtro='';
@@ -36,10 +36,20 @@ exports.index=function(req,res){
         res.render('quizes/index', {quizes:quizes,filtro:filtro});
     }).catch(
         function(error){next(error);}
-    );    
-   
+    );       
     
 }
+
+// GET /quizes/new
+exports.new = function(req,res){
+    // Crea un objeto Quiz no persistente
+    var quiz = models.Quiz.build(
+            { pregunta: 'Pregunta', 
+              respuesta: 'Respuesta', 
+              tema:models.Quiz.tematica.otro.codigo }
+        );
+    res.render('quizes/new', {pregunta: quiz, temas:models.Quiz.tematica});   
+};
 
 // GET /quizes/:id
 exports.show = function(req,res){

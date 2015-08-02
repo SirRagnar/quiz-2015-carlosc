@@ -20,6 +20,8 @@ router.param('quizId', quizController.load); // autolad :quizId
 //////////////////////
 // La lista de recursos es la primera del API y se resuelve en el controlador con index.
 router.get('/quizes',                      quizController.index);
+// Ruta para crear una pregunta nueva
+router.get('/quizes/new',                  quizController.new);
 // La ruta que muestra el recurso principal suele ser show en el controlador
 router.get('/quizes/:quizId(\\d+)',        quizController.show);
 // De esta cuelgan todas las que saquen información relacionada con el recurso
