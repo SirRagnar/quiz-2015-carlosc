@@ -28,6 +28,8 @@ router.post('/quizes/create',              quizController.create);
 router.get('/quizes/:quizId(\\d+)/edit',   quizController.edit);
 // Ruta que hace el put para actualizar una pregunta
 router.put('/quizes/:quizId(\\d+)',        quizController.update);
+// Ruta para eliminar una pregunta
+router.delete('/quizes/:quizId(\\d+)',     quizController.destroy);
 // La ruta que muestra el recurso principal suele ser show en el controlador
 router.get('/quizes/:quizId(\\d+)',        quizController.show);
 // De esta cuelgan todas las que saquen información relacionada con el recurso

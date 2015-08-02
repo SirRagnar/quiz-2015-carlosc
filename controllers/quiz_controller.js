@@ -99,6 +99,15 @@ exports.update=function(req,res){
     );
 };
 
+// DELETE /quizes/:id
+exports.destroy=function(req,res,next){
+    req.quiz.destroy().then(
+        function(){
+            res.redirect('/quizes');
+        }
+    ).catch(function(error){next(error)});
+};
+
 // GET /quizes/:id
 exports.show = function(req,res){
     res.render('quizes/show', {pregunta: req.quiz,errors:[]});   
