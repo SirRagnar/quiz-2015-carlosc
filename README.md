@@ -20,3 +20,5 @@ DATABASE_URL=sqlite://:@:/
 DATABASE_STORAGE=quiz.sqlite
 ```
 De esta forma se emula el entorno de heroku en local para sqlite
+
+Por otra parte, en local, con windows 7, formeman start no me funciona. Mirando el log, veo que las peticiones llegan al servidor, pero al navegador no le llegan. He intentado varias cosas como abrir el firewall para foreman o lanzar una pregunta en [stackoverflow](http://stackoverflow.com/q/31631351/840635) pero no lo he conseguido aún. Por tanto, en local lo ejecuto con npm start y para ello hay que descomentar antes dos líneas en los ficheros [www](bin/www) y [models.js](models/models.js). Espero encontrar pronto el problema y poder deshacer esto.
