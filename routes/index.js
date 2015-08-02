@@ -22,6 +22,8 @@ router.param('quizId', quizController.load); // autolad :quizId
 router.get('/quizes',                      quizController.index);
 // Ruta para crear una pregunta nueva
 router.get('/quizes/new',                  quizController.new);
+// Ruta de respuesta tras crear la pregunta
+router.post('/quizes/create',              quizController.create);
 // La ruta que muestra el recurso principal suele ser show en el controlador
 router.get('/quizes/:quizId(\\d+)',        quizController.show);
 // De esta cuelgan todas las que saquen información relacionada con el recurso

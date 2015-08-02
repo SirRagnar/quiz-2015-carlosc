@@ -13,12 +13,15 @@
 	<ul>
 		<% var i; for(i=0; i<quizes.length; i++){ %>
 
-			<li><a href="./<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></li>
+			<li><a href="/quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></li>
 		
-		<% } %>
+		<% } %>		
 	</ul>
 <% } else{ %>
 
 <p> No se han encontrado respuestas para el patrón de búsqueda que ha introducido: <span class="patron"><%= filtro %></span> </p>
 
 <% } %>
+
+<hr />
+<a href="/quizes/new">Crear pregunta</a>

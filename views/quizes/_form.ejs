@@ -1,6 +1,6 @@
 <p>
-	<label for="quizField" form="quizCRUDForm">Temática: </label>
-	<select id="quizField" name="pregunta[tema]" autofocus>
+	<label for="topicField" form="quizCRUDForm">Temática: </label>
+	<select id="topicField" name="pregunta[tema]" autofocus>
 		<% var temasKeys = Object.keys(temas); %>
 		<% var i; for(i=0; i<temasKeys.length; i++){ 
 				var selected='';
@@ -23,6 +23,6 @@
 	<input type="text" id="answerField" name="pregunta[respuesta]" placeholder="Introduzca la respuesta" value="<%= pregunta.respuesta %>"  />
 
 	<br />
-	<input type="submit" value="Buscar"/>
+	<input type="submit" value="Crear"/>
 </p>
 

@@ -36,9 +36,8 @@ exports.index=function(req,res,next){
         res.render('quizes/index', {quizes:quizes,filtro:filtro});
     }).catch(
         function(error){next(error);}
-    );       
-    
-}
+    );  
+};
 
 // GET /quizes/new
 exports.new = function(req,res){
@@ -49,6 +48,20 @@ exports.new = function(req,res){
               tema:models.Quiz.tematica.otro.codigo }
         );
     res.render('quizes/new', {pregunta: quiz, temas:models.Quiz.tematica});   
+};
+
+// POST /quizes/create => Primitiva sin vista asociada
+exports.create = function(req,res,next){
+    console.log('Pregunta a crear => ');
+    console.log(req.body.pregunta);
+    var quiz = models.Quiz.build(req.body.pregunta);
+
+    // guarda en BBDD los campos de quiz
+    quiz.save({fields:["pregunta","respuesta","tema"]}).then(function(){
+        res.redirect('/quizes');
+    }).catch(function(error){
+        next(error);
+    });
 };
 
 // GET /quizes/:id
