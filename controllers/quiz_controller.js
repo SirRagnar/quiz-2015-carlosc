@@ -33,7 +33,7 @@ exports.index=function(req,res,next){
     }
 
     models.Quiz.findAll(opcionesBusqueda).then(function(quizes){
-        res.render('quizes/index', {quizes:quizes,filtro:filtro});
+        res.render('quizes/index', {quizes:quizes,filtro:filtro,errors:[]});
     }).catch(
         function(error){next(error);}
     );  
@@ -47,7 +47,7 @@ exports.new = function(req,res){
               respuesta: 'Respuesta', 
               tema:models.Quiz.tematica.otro.codigo }
         );
-    res.render('quizes/new', {pregunta: quiz, temas:models.Quiz.tematica});   
+    res.render('quizes/new', {pregunta: quiz, temas:models.Quiz.tematica,errors:[]});   
 };
 
 // POST /quizes/create => Primitiva sin vista asociada
@@ -56,17 +56,28 @@ exports.create = function(req,res,next){
     console.log(req.body.pregunta);
     var quiz = models.Quiz.build(req.body.pregunta);
 
-    // guarda en BBDD los campos de quiz
-    quiz.save({fields:["pregunta","respuesta","tema"]}).then(function(){
-        res.redirect('/quizes');
-    }).catch(function(error){
-        next(error);
-    });
+    // Validación de quiz
+    quiz.validate().then(
+        function(err){
+            if(err){
+                res.render('quizes/new', {pregunta: quiz, temas:models.Quiz.tematica, errors: err.errors});
+            }else{
+                 // guarda en BBDD los campos de quiz
+                quiz.save({fields:["pregunta","respuesta","tema"]}).then(function(){
+                    res.redirect('/quizes');
+                }).catch(function(error){
+                    next(error);
+                });
+            }
+        }
+    );
+
+   
 };
 
 // GET /quizes/:id
 exports.show = function(req,res){
-    res.render('quizes/show', {pregunta: req.quiz});   
+    res.render('quizes/show', {pregunta: req.quiz,errors:[]});   
 };
 
 // GET /quizes/:id/answer
@@ -75,5 +86,5 @@ exports.answer=function(req,res){
     if(req.query.respuesta===req.quiz.respuesta){
         resultado='Correcto';
     }
-    res.render('quizes/answer', {pregunta: req.quiz, respuesta: resultado});    
+    res.render('quizes/answer', {pregunta: req.quiz, respuesta: resultado,errors:[]});    
 };
