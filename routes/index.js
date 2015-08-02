@@ -24,6 +24,10 @@ router.get('/quizes',                      quizController.index);
 router.get('/quizes/new',                  quizController.new);
 // Ruta de respuesta tras crear la pregunta
 router.post('/quizes/create',              quizController.create);
+// Ruta para iniciar la edición de una pregunta
+router.get('/quizes/:quizId(\\d+)/edit',   quizController.edit);
+// Ruta que hace el put para actualizar una pregunta
+router.put('/quizes/:quizId(\\d+)',        quizController.update);
 // La ruta que muestra el recurso principal suele ser show en el controlador
 router.get('/quizes/:quizId(\\d+)',        quizController.show);
 // De esta cuelgan todas las que saquen información relacionada con el recurso

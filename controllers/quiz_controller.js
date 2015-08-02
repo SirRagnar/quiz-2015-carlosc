@@ -70,9 +70,33 @@ exports.create = function(req,res,next){
                 });
             }
         }
-    );
+    );   
+};
 
-   
+// GET /quizes/:id/edit
+exports.edit=function(req,res){
+    var quiz = req.quiz; // autoload de quiz
+
+    res.render('quizes/edit', {pregunta: quiz, temas:models.Quiz.tematica, errors:[]});
+};
+
+// PUT /quizes/:id
+exports.update=function(req,res){
+    req.quiz.pregunta  = req.body.pregunta.pregunta;
+    req.quiz.respuesta = req.body.pregunta.respuesta;
+    req.quiz.tema      = req.body.pregunta.tema;
+
+    req.quiz.validate().then(
+        function(err){
+            if(err){
+                res.render('quizes/edit',{pregunta: req.quiz, temas:models.Quiz.tematica, errors: err.errors});
+            }else{
+                req.quiz // save: guarda campos pregunta y respuesta en BD
+                .save( {fields: ['pregunta', 'respuesta', 'tema']})
+                .then( function(){res.redirect('/quizes');});
+            }
+        }
+    );
 };
 
 // GET /quizes/:id
