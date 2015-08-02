@@ -12,3 +12,16 @@ nav, span            { margin: 0px 10px 0px 0px}
 img.portrait         {vertical-align: text-top; }
 
 section p{ text-align: left;}
+
+li{text-align: left;}
+hr{margin-top: 20px; margin-bottom: 20px; margin-left: 5px;margin-right: 5px}
+
+form.filtros input[type="text"]{width: 80%}
+
+span.patron{
+	background-color: grey;
+	color: white;
+	font-style: italic;
+	padding-right: 15px;
+	padding-left: 15px;
+}
