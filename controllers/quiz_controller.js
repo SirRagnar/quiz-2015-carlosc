@@ -2,10 +2,11 @@
 
 // Importamos el modelo
 var models=require('../models/models.js');
+var Tematica=models.Tematica;
 
 // Autoload - factoriza el código si la ruta incluye :quizId
 exports.load=function(req,res,next,quizId){
-    models.Quiz.find(quizId).then(
+    models.Quiz.findById(quizId).then(
         function(quiz){
             if(quiz){
                 req.quiz=quiz;
@@ -45,9 +46,9 @@ exports.new = function(req,res){
     var quiz = models.Quiz.build(
             { pregunta: 'Pregunta', 
               respuesta: 'Respuesta', 
-              tema:models.Quiz.tematica.otro.codigo }
+              tema:Tematica.otro.codigo }
         );
-    res.render('quizes/new', {pregunta: quiz, temas:models.Quiz.tematica,errors:[]});   
+    res.render('quizes/new', {pregunta: quiz, temas:Tematica,errors:[]});   
 };
 
 // POST /quizes/create => Primitiva sin vista asociada
@@ -60,7 +61,7 @@ exports.create = function(req,res,next){
     quiz.validate().then(
         function(err){
             if(err){
-                res.render('quizes/new', {pregunta: quiz, temas:models.Quiz.tematica, errors: err.errors});
+                res.render('quizes/new', {pregunta: quiz, temas:Tematica, errors: err.errors});
             }else{
                  // guarda en BBDD los campos de quiz
                 quiz.save({fields:["pregunta","respuesta","tema"]}).then(function(){
@@ -77,7 +78,7 @@ exports.create = function(req,res,next){
 exports.edit=function(req,res){
     var quiz = req.quiz; // autoload de quiz
 
-    res.render('quizes/edit', {pregunta: quiz, temas:models.Quiz.tematica, errors:[]});
+    res.render('quizes/edit', {pregunta: quiz, temas:Tematica, errors:[]});
 };
 
 // PUT /quizes/:id
@@ -89,7 +90,7 @@ exports.update=function(req,res){
     req.quiz.validate().then(
         function(err){
             if(err){
-                res.render('quizes/edit',{pregunta: req.quiz, temas:models.Quiz.tematica, errors: err.errors});
+                res.render('quizes/edit',{pregunta: req.quiz, temas:Tematica, errors: err.errors});
             }else{
                 req.quiz // save: guarda campos pregunta y respuesta en BD
                 .save( {fields: ['pregunta', 'respuesta', 'tema']})

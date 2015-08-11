@@ -49,11 +49,11 @@ var tematica = {
 		otro:        {codigo:'otro', descripcion: 'Otro'}
 };
 
+// Agregar un atributo con las temáticas posibles
+exports.Tematica=tematica;
+
 // Importar la definición de las tablas Quiz
 var Quiz = sequelize.import(path.join(__dirname,'quiz'));
-
-// Agregar un atributo con las temáticas posibles
-Quiz.tematica=tematica;
 
 exports.Quiz=Quiz; // Exportar la definición de la tabla Quiz
 

@@ -11,7 +11,9 @@
 
 			<option label="<%= temas[temasKeys[i]].descripcion %>" 
 			        value="<%= temas[temasKeys[i]].codigo %>" 
-			        <%=selected%> />
+			        <%=selected%>>
+				<%= temas[temasKeys[i]].descripcion %>	
+			</option>
 		
 		<% } %>
 	</select>
