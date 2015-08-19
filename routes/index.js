@@ -4,6 +4,9 @@ var router = express.Router();
 // Declaración del controller de preguntas
 var quizController = require('../controllers/quiz_controller');
 
+// Declaración del controlador de comentarios
+var commentController = require('../controllers/comment_controller');
+
 // Declaración del controlador de página de autor
 var authorController = require('../controllers/author_controller');
 
@@ -34,6 +37,13 @@ router.delete('/quizes/:quizId(\\d+)',     quizController.destroy);
 router.get('/quizes/:quizId(\\d+)',        quizController.show);
 // De esta cuelgan todas las que saquen información relacionada con el recurso
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
+
+///////////////////////////
+// API Rest de comentarios
+///////////////////////////
+router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);
+router.post('/quizes/:quizId(\\d+)/comments/create', commentController.create);
+
 
 //////////////////////////////////
 // API Rest de la página de autor
