@@ -1,3 +1,4 @@
+/// <reference path="../typings/node/node.d.ts"/>
 var path=require('path');
 
 // Postgres DATABASE_URL = postgres://user:passwd@host:port/database
@@ -77,3 +78,10 @@ sequelize.sync().then(function(){
 		}
 	}).then(function(){console.log('Base de datos inicializa')});
 });
+
+var Comment=sequelize.import(path.join(__dirname, 'comment'));
+exports.Comment=Comment;
+
+Comment.belongsTo(Quiz);
+Quiz.hasMany(Comment);
+
