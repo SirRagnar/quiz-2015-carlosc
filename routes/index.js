@@ -28,6 +28,7 @@ router.param('commentId', commentController.load); // autoload :commentId
 router.get('/login', sessionController.new);      // Formulario de login
 router.post('/login', sessionController.create);  // Crear sesión
 router.get('/logout', sessionController.destroy); // Destruir sesión
+router.get('*', sessionController.autologout);
 
 //////////////////////
 // API Rest de quizes

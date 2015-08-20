@@ -1,6 +1,37 @@
 // Controlador de sesiones
 'use strict';
 
+var sesiones = {};
+
+// MW de autologout
+exports.autologout = function(req, res, next){
+	console.log('Entrando en autologout');
+	if(req.session.user){		
+		if(sesiones[req.session.user]){
+			console.log('Sesión preexistente');
+			var datosSesion=sesiones[req.session.user];
+			var ahora = new Date();
+			
+			var timeDiff = Math.abs(ahora.getTime() - datosSesion.lastRequest.getTime());
+			var diffMins = Math.ceil(timeDiff / (1000 * 60 ));
+			
+			console.log('=> última petición hace '+diffMins+' minutos.');
+			if(Math.abs(diffMins)>=2){				
+				cerrarSesionYRedireccionar(req,res);
+			}
+		}else{
+			console.log('Sesión nueva');
+			// Se almacena la sesión
+			sesiones[req.session.user]={
+				lastRequest: new Date()			
+			}
+		}
+	}
+	console.log('Lista de sesiones resultante: ');
+	console.log(sesiones);
+	next();
+}
+
 // MW de autorización
 exports.loginRequired = function(req, res, next){
 	if(req.session.user) {
@@ -41,6 +72,13 @@ exports.create = function(req, res) {
 
 // DELETE /logout -> Destruir la sesión
 exports.destroy = function(req, res){
-	delete req.session.user;
-	res.redirect(req.session.redir.toString()); // Redirecciona de vuelta al paso anterior
+	cerrarSesionYRedireccionar(req,res);
 };
+
+function cerrarSesionYRedireccionar(req,res){
+	if(sesiones[req.session.user]){
+		delete sesiones[req.session.user];
+	}
+	delete req.session.user;
+	res.redirect(req.session.redir.toString()); // Redirecciona de vuelta al paso anterior	
+}
