@@ -10,6 +10,9 @@ var commentController = require('../controllers/comment_controller');
 // Declaración del controlador de página de autor
 var authorController = require('../controllers/author_controller');
 
+// Controlador de sesiones
+var sessionController = require('./controllers/session_controller');
+
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Quiz',errors:[] });
@@ -17,6 +20,11 @@ router.get('/', function(req, res) {
 
 /* Autoload de comandos con :quizId */
 router.param('quizId', quizController.load); // autolad :quizId
+
+// Definición de rutas de sesión
+router.get('/login', sessionController.new);      // Formulario de login
+router.post('/login', sessionController.create);  // Crear sesión
+router.get('/logout', sessionController.destroy); // Destruir sesión
 
 //////////////////////
 // API Rest de quizes
