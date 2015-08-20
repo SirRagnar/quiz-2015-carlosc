@@ -4,12 +4,27 @@
 		<input type="text" name="respuesta" value="Respuesta" />
 		<input type="submit" value="Enviar" />
 	</p>
-	
-	<hr />
-	<p> <a href="/quizes/<%= pregunta.id %>/comments/new">Nuevo comentario</a> </p>
-	
-	<h3>Comentarios</h3>
-	<% for(index in pregunta.Comments){ %>
-		<p> - <%= pregunta.Comments[index].texto %></p>
-	<% }%>	
-</form>
+</form>	
+
+<hr />
+<p> <a href="/quizes/<%= pregunta.id %>/comments/new"><button>Nuevo comentario</button></a> </p>
+
+<h3>Comentarios</h3>
+<% for(index in pregunta.Comments){ %>
+	<% if(pregunta.Comments[index].publicado || session.user){ %>
+		<p> - <%= pregunta.Comments[index].texto %>
+			
+			<%if(!pregunta.Comments[index].publicado){%>
+				<span class="patron">No publicado</span>
+			<% } %>
+			
+			<% if(session.user && !pregunta.Comments[index].publicado){ %>
+				<a href="/quizes/<%=pregunta.id%>/comments/<%=pregunta.Comments[index].id%>/publish">
+					<button>Publicar</button>
+				</a>
+			<% } %>
+			
+		</p>
+	<% } %>
+<% }%>	
+
