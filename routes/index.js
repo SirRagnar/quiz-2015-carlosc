@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
 
@@ -11,7 +13,7 @@ var commentController = require('../controllers/comment_controller');
 var authorController = require('../controllers/author_controller');
 
 // Controlador de sesiones
-var sessionController = require('./controllers/session_controller');
+var sessionController = require('../controllers/session_controller');
 
 /* GET home page. */
 router.get('/', function(req, res) {
