@@ -12,16 +12,16 @@
 <% if(quizes.length>0){ %>
 	<ul>
 		<% var i; for(i=0; i<quizes.length; i++){ %>
-
 			<li><a class="pregunta" href="/quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a>
-				<a href="/quizes/<%= quizes[i].id %>/edit"><button>Editar</button></a>
-				<form class="inline" method="post" action="/quizes/<%= quizes[i].id %>?_method=delete">
-					<button type="submit" onclick="return confirm('Borrar la pregunta: \'<%= quizes[i].pregunta %>\'');">
-						Borrar
-					</button>
-				</form>
-			</li>
-		
+				<% if(session.user){ %>
+					<a href="/quizes/<%= quizes[i].id %>/edit"><button>Editar</button></a>
+					<form class="inline" method="post" action="/quizes/<%= quizes[i].id %>?_method=delete">
+						<button type="submit" onclick="return confirm('Borrar la pregunta: \'<%= quizes[i].pregunta %>\'');">
+							Borrar
+						</button>
+					</form>
+				<% } %>
+			</li>		
 		<% } %>		
 	</ul>
 <% } else{ %>
@@ -30,5 +30,7 @@
 
 <% } %>
 
-<hr />
-<a href="/quizes/new">Crear pregunta</a>
+<%if(session.user){ %>
+	<hr />
+	<a href="/quizes/new">Crear pregunta</a>
+<%} %>
