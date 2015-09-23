@@ -25,21 +25,21 @@ console.log('Variables de la cadena de conexión presuntamente establecidas: \n'
 	'dialect:' + dialect + '\n' +
 	'port:' + port + '\n' +
 	'host:' + host + '\n' +
-	'storage:' + storage 
+	'storage:' + storage
 	);
 
 // Cargar modelo ORM
 var Sequelize=require('sequelize');
 
 // Usar BBDD SQLite o Postgres
-var sequelize = new Sequelize(DB_name, user, pwd, 
+var sequelize = new Sequelize(DB_name, user, pwd,
   { dialect:  dialect,
     protocol: protocol,
     port:     port,
     host:     host,
     storage:  storage,  // solo SQLite (.env)
     omitNull: true      // solo Postgres
-  }      
+  }
 );
 
 var tematica = {
@@ -62,19 +62,19 @@ exports.Quiz=Quiz; // Exportar la definición de la tabla Quiz
 sequelize.sync().then(function(){
 	Quiz.count().then(function(count){
 		if(count===0){ // La tabla se inicializa sólo si está vacía
-			
+
 			Quiz.create({
 				tema: tematica.humanidades.codigo,
 				pregunta: 'Capital de Italia',
 				respuesta: 'Roma'
 			});
-			
+
 			Quiz.create({
 				tema: tematica.humanidades.codigo,
 				pregunta: 'Capital de Portugal',
 				respuesta: 'Lisboa'
 			});
-			
+
 		}
 	}).then(function(){console.log('Base de datos inicializa')});
 });
@@ -84,4 +84,3 @@ exports.Comment=Comment;
 
 Comment.belongsTo(Quiz);
 Quiz.hasMany(Comment);
-

@@ -24,7 +24,7 @@ exports.load=function(req,res,next,quizId){
 // GET /quizes
 exports.index=function(req,res,next){
 
-    var opcionesBusqueda={};   
+    var opcionesBusqueda={};
     var filtro='';
     if(req.query.search){
         filtro=req.query.search;
@@ -33,25 +33,25 @@ exports.index=function(req,res,next){
         console.log('Filtro procesado: ' + patron);
 
         opcionesBusqueda.where=["pregunta like ?", patron];
-       
+
     }
 
     models.Quiz.findAll(opcionesBusqueda).then(function(quizes){
         res.render('quizes/index', {quizes:quizes,filtro:filtro,errors:[]});
     }).catch(
         function(error){next(error);}
-    );  
+    );
 };
 
 // GET /quizes/new
 exports.new = function(req,res){
     // Crea un objeto Quiz no persistente
     var quiz = models.Quiz.build(
-            { pregunta: 'Pregunta', 
-              respuesta: 'Respuesta', 
+            { pregunta: 'Pregunta',
+              respuesta: 'Respuesta',
               tema:Tematica.otro.codigo }
         );
-    res.render('quizes/new', {pregunta: quiz, temas:Tematica,errors:[]});   
+    res.render('quizes/new', {pregunta: quiz, temas:Tematica,errors:[]});
 };
 
 // POST /quizes/create => Primitiva sin vista asociada
@@ -74,7 +74,7 @@ exports.create = function(req,res,next){
                 });
             }
         }
-    );   
+    );
 };
 
 // GET /quizes/:id/edit
@@ -114,7 +114,7 @@ exports.destroy=function(req,res,next){
 
 // GET /quizes/:id
 exports.show = function(req,res){
-    res.render('quizes/show', {pregunta: req.quiz,errors:[]});   
+    res.render('quizes/show', {pregunta: req.quiz,errors:[]});
 };
 
 // GET /quizes/:id/answer
@@ -123,5 +123,5 @@ exports.answer=function(req,res){
     if(req.query.respuesta===req.quiz.respuesta){
         resultado='Correcto';
     }
-    res.render('quizes/answer', {pregunta: req.quiz, respuesta: resultado,errors:[]});    
+    res.render('quizes/answer', {pregunta: req.quiz, respuesta: resultado,errors:[]});
 };

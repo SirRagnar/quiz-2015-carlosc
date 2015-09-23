@@ -2,19 +2,19 @@
 	<label for="topicField" form="quizCRUDForm">Temática: </label>
 	<select id="topicField" name="pregunta[tema]" autofocus>
 		<% var temasKeys = Object.keys(temas); %>
-		<% var i; for(i=0; i<temasKeys.length; i++){ 
+		<% var i; for(i=0; i<temasKeys.length; i++){
 				var selected='';
 				if(temas[temasKeys[i]].codigo===pregunta.tema){
 					selected='selected';
 				}
 		%>
 
-			<option label="<%= temas[temasKeys[i]].descripcion %>" 
-			        value="<%= temas[temasKeys[i]].codigo %>" 
+			<option label="<%= temas[temasKeys[i]].descripcion %>"
+			        value="<%= temas[temasKeys[i]].codigo %>"
 			        <%=selected%>>
-				<%= temas[temasKeys[i]].descripcion %>	
+				<%= temas[temasKeys[i]].descripcion %>
 			</option>
-		
+
 		<% } %>
 	</select>
 	<br />
@@ -27,4 +27,3 @@
 	<br />
 	<input type="submit" value="Enviar"/>
 </p>
-

@@ -21,12 +21,12 @@ exports.load=function(req,res,next,commentId){
 }
 
 // GET /comments/new
-exports.new = function(req,res){    
-    res.render('comments/new', {quizId: req.params.quizId, errors:[]});   
+exports.new = function(req,res){
+    res.render('comments/new', {quizId: req.params.quizId, errors:[]});
 };
 
 // POST /comments/create => Primitiva sin vista asociada
-exports.create = function(req,res,next){   
+exports.create = function(req,res,next){
     var comment = models.Comment.build({texto: req.body.comment.texto, publicado: false, QuizId: req.params.quizId});
 
     console.log( 'Recibida petición para crear un comentario con texto ' + comment.texto);
@@ -45,14 +45,14 @@ exports.create = function(req,res,next){
                 });
             }
         }
-    );   
+    );
 };
 
 // GET /quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish
 exports.publish = function (req, res, next) {
   req.comment.publicado = true;
-  
+
   req.comment.save({fields: ['publicado']})
     .then(function () { res.redirect('/quizes/' + req.params.quizId); })
-    .catch(function (error) { next(error); });  
+    .catch(function (error) { next(error); });
 };
