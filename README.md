@@ -1,4 +1,4 @@
-# Quiz el juego de las pregunas
+# Quiz el juego de las pregunas [![bitHound Score](https://www.bithound.io/github/SirRagnar/quiz-2015-carlosc/badges/score.svg)](https://www.bithound.io/github/SirRagnar/quiz-2015-carlosc)
 
 Ejercicio del curso de [Desarrollo de servicios en la nube con HTML5, Javascript y node.js](https://www.miriadax.net/web/javascript-node-js)
 
